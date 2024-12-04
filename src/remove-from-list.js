@@ -19,7 +19,32 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  */
 
-module.exports = function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+module.exports = function removeKFromList(l, k) {
+
+// Если первый элемент равен k, удаляем его
+while (l !== null && l.value === k) {
+  l = l.next;
+}
+
+// Если после того как удалили первый элемент список = 0, то возврат null
+if (l === null) {
+  return null;
+}
+
+// Обходим то что осталось или то что не трогали (как получится)
+let current = l;
+
+// Проходим список
+while (current.next !== null) {
+  // если след.узел - к, то пропуск хода и не записываем
+  if(current.next.value === k) {
+    current.next = current.next.next;
+  } else {
+    // Если не так, то всё норм, идет дальше, до первого столкновения PVE
+    current = current.next;
+  }
+}
+
+// To chto izmenili vozvrat nado
+return l;
 }
